@@ -14,7 +14,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   var _questionIdx = 0;
-  var _questions = [
+   final _questions = const [
                     { 'qtext':'Who introduced World to Iphone?',
                       'options':['Mark Zuckerberg', 'Steve Jobs', 'Elon Musk'],
                     },
@@ -39,14 +39,14 @@ class _MyAppState extends State<MyApp> {
             title: Text('Quiz App'),
             centerTitle: true,
           ),
-          body: Column(
+          body: _questionIdx < _questions.length ? Column(
             children:[
               Question(this._questions[this._questionIdx]['qtext']),
               ...(this._questions[this._questionIdx]['options'] as List<String>).map((answer){
                 return Answer(answer, this._answerQuestion);
               }).toList(),
             ]
-          ),
+          ) : Center(child: Text('All Done!'),),
         )
     );
   }
