@@ -6,7 +6,7 @@ class Quiz extends StatelessWidget {
 
   final String question;
   final Function answerQuestion;
-  final List<String> options;
+  final List<Map<String, Object>> options;
 
   Quiz({
     @required this.question,
@@ -20,8 +20,8 @@ class Quiz extends StatelessWidget {
     return Column(
         children:[
     Question(question),
-    ...(options as List<String>).map((answer){
-    return Answer(answer, answerQuestion);
+    ...options.map((answer){
+    return Answer(answer['option'], () => answerQuestion(answer['score']));
     }).toList()
     ]);
   }
